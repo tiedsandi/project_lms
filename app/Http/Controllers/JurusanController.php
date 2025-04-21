@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MajorDetail;
 use App\Models\Majors;
+use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +16,8 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        $majors = Majors::orderBy('id', 'desc')->paginate(5);
+        $majors = Majors::with('MajorDetail')->orderBy('id', 'desc')->paginate(5);
+        return $majors;
         return view('jurusan.index', compact('majors'));
     }
 
@@ -23,7 +26,17 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        return view('jurusan.create');
+        $usersPIC = User::whereHas('UserRoles.role', fn($query) => $query->where('name', 'PIC'))
+            ->orderBy('name')
+            ->get();
+        // return $usersPIC;
+        // $users = User::with('UserRoles.role')
+        // ->whereHas('UserRoles.role', function ($query) {
+        //     $query->where('name', 'PIC');
+        // })
+        // ->orderBy('name', 'asc')
+        // ->get();
+        return view('jurusan.create', compact('usersPIC'));
     }
 
     /**
@@ -34,6 +47,7 @@ class JurusanController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'is_active' => 'nullable|boolean',
+            'user_pic' => 'nullable|exists:users,id',
         ]);
 
         if ($validator->fails()) {
@@ -47,7 +61,15 @@ class JurusanController extends Controller
         $validatedData['is_active'] = $request->has('is_active') ? 1 : 0;
 
         try {
-            Majors::create($validatedData);
+            $major = Majors::create($validatedData);
+
+            if (!empty($validatedData['user_pic'])) {
+                MajorDetail::create([
+                    'major_id' => $major->id,
+                    'user_id' => $validatedData['user_pic'],
+                ]);
+            }
+
             Alert::success('Berhasil', 'Jurusan berhasil dibuat!');
         } catch (\Exception $e) {
             Alert::error('Error', 'Gagal membuat jurusan!');
@@ -70,7 +92,10 @@ class JurusanController extends Controller
     public function edit(string $id)
     {
         $major = Majors::findOrFail($id);
-        return view('jurusan.edit', compact('major'));
+        $usersPIC = User::whereHas('UserRoles.role', fn($query) => $query->where('name', 'PIC'))
+            ->orderBy('name')
+            ->get();
+        return view('jurusan.edit', compact('major', 'userPIC'));
     }
 
     /**
@@ -81,6 +106,7 @@ class JurusanController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'is_active' => 'nullable|boolean',
+            'user_pic' => 'nullable|exists:users,id',
         ]);
 
         if ($validator->fails()) {
@@ -97,9 +123,18 @@ class JurusanController extends Controller
             $major = Majors::findOrFail($id);
             $major->update($validatedData);
 
+            if (!empty($validatedData['user_pic'])) {
+                MajorDetail::updateOrCreate(
+                    ['major_id' => $major->id],
+                    ['user_id' => $validatedData['user_pic']]
+                );
+            } else {
+                MajorDetail::where('major_id', $major->id)->delete();
+            }
+
             Alert::success('Berhasil', 'Jurusan berhasil diupdate!');
         } catch (\Exception $e) {
-            Alert::error('Error', 'Gagal membuat jurusan!');
+            Alert::error('Error', 'Gagal mengupdate jurusan!');
         }
 
         return redirect()->route('major.index');

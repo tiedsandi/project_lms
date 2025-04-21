@@ -14,6 +14,20 @@
         <div class="text-danger small">{{ $message }}</div>
       @enderror
     </div>
+
+    <div class="mb-3">
+      <label for="user_pic" class="form-label">Penanggung Jawab (PIC) </label>
+      <select name="user_pic" id="user_pic" class="form-select">
+        <option value="" disabled selected>Pilih Penanggung Jawab</option>
+        @foreach($usersPIC as $user)
+          <option value="{{ $user->id }}" {{ old('user_pic') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+        @endforeach
+      </select>
+      @error('user_pic')
+        <div class="text-danger small">{{ $message }}</div>
+      @enderror
+    </div>
+
     <div class="form-check mb-3 d-flex">
       <input type="checkbox" name="is_active" id="is_active" class="form-check-input" value="1" checked>
       <label for="is_active" class="form-check-label ms-2">Tandai jurusan ini sebagai aktif.</label>

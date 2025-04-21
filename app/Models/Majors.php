@@ -10,4 +10,9 @@ class Majors extends Model
         'name',
         'is_active',
     ];
+
+    public function MajorDetail()
+    {
+        return $this->belongsTo(MajorDetail::class);
+    }
 }
