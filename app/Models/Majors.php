@@ -11,8 +11,20 @@ class Majors extends Model
         'is_active',
     ];
 
-    public function MajorDetail()
+    public function majorDetail()
     {
-        return $this->belongsTo(MajorDetail::class);
+        return $this->hasOne(MajorDetail::class, 'major_id');
+    }
+
+    public function pic()
+    {
+        return $this->hasOneThrough(
+            User::class,    // Target: User
+            MajorDetail::class, // Melalui: MajorDetail
+            'major_id',     // Foreign key di MajorDetail
+            'id',           // Foreign key di User (default 'id')
+            'id',           // Local key di Major
+            'user_id'       // Local key di MajorDetail
+        );
     }
 }

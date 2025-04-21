@@ -16,8 +16,7 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        $majors = Majors::with('MajorDetail')->orderBy('id', 'desc')->paginate(5);
-        return $majors;
+        $majors = Majors::with(['pic'])->orderBy('id', 'desc')->paginate(5);
         return view('jurusan.index', compact('majors'));
     }
 

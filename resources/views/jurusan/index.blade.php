@@ -30,7 +30,7 @@
                 {{ $major->is_active == 1 ? 'Aktif' : 'Tidak Aktif' }}
               </span>
             </td>
-            <td>Sandi</td>
+            <td>{{ $major->pic ? $major->pic->name : '-' }}</td>
             <td>
               <a href="{{ route('major.edit', $major->id) }}" class="btn btn-sm btn-warning">Edit</a>
               <form action="{{ route('major.destroy', $major->id) }}" method="POST" class="d-inline">
