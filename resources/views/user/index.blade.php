@@ -51,7 +51,6 @@
 @endsection
 
 @section('script')
-<!-- Script kamu -->
 <script>
   $('.btn-hapus').click(function(e) {
     e.preventDefault(); 

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Roles;
+use App\Models\Majors;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 
-class RoleController extends Controller
+class JurusanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roles = Roles::orderBy('id', 'desc')->paginate(5);
-        return view('role.index', compact('roles'));
+        $majors = Majors::orderBy('id', 'desc')->paginate(5);
+        return view('jurusan.index', compact('majors'));
     }
 
     /**
@@ -23,7 +23,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('role.create');
+        return view('jurusan.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class RoleController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Alert::error('Validasi Gagal', 'Silakan periksa input Anda.');
+            Alert::error('Validasi Gagal');
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -47,13 +47,13 @@ class RoleController extends Controller
         $validatedData['is_active'] = $request->has('is_active') ? 1 : 0;
 
         try {
-            Roles::create($validatedData);
-            Alert::success('Berhasil', 'Role berhasil dibuat!');
+            Majors::create($validatedData);
+            Alert::success('Berhasil', 'Jurusan berhasil dibuat!');
         } catch (\Exception $e) {
-            Alert::error('Error', 'Gagal membuat role!');
+            Alert::error('Error', 'Gagal membuat jurusan!');
         }
 
-        return redirect()->route('role.index');
+        return redirect()->route('major.index');
     }
 
     /**
@@ -69,8 +69,8 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        $role = Roles::findOrFail($id);
-        return view('role.edit', compact('role'));
+        $major = Majors::findOrFail($id);
+        return view('jurusan.edit', compact('major'));
     }
 
     /**
@@ -94,15 +94,15 @@ class RoleController extends Controller
         $validatedData['is_active'] = $request->has('is_active') ? 1 : 0;
 
         try {
-            $role = Roles::findOrFail($id);
-            $role->update($validatedData);
+            $major = Majors::findOrFail($id);
+            $major->update($validatedData);
 
-            Alert::success('Berhasil', 'Role berhasil diupdate!');
+            Alert::success('Berhasil', 'Jurusan berhasil diupdate!');
         } catch (\Exception $e) {
-            Alert::error('Error', 'Gagal membuat role!');
+            Alert::error('Error', 'Gagal membuat jurusan!');
         }
 
-        return redirect()->route('role.index');
+        return redirect()->route('major.index');
     }
 
     /**
@@ -111,13 +111,13 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         try {
-            $role = Roles::findOrFail($id);
+            $role = Majors::findOrFail($id);
             $role->delete();
             Alert::success('Success', 'Role berhasil di hapus!');
         } catch (\Exception $e) {
             Alert::error('Error', 'Gagal untuk menghapus role!');
         }
 
-        return redirect()->route('role.index');
+        return redirect()->route('major.index');
     }
 }

@@ -1,12 +1,12 @@
 @extends('layouts.admin-layout')
 @extends('layouts.main')
-@section('page-title', 'Role')
+@section('page-title', 'Jurusan')
 @section('content')
 <section class="py-5 text-center bg-white rounded">
   <div class="container">
     <div class="d-flex justify-content-between mb-3">
-      <h3>Role List</h3>
-      <a href="{{ route('role.create') }}" class="btn btn-primary">Add Role</a>
+      <h3>List Jurusan</h3>
+      <a href="{{ route('major.create') }}" class="btn btn-primary">Tambah Jurusan</a>
     </div>
 
 
@@ -14,27 +14,27 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Name</th>
-          <th>Active</th>
-          <th>Actions</th>
+          <th>Nama</th>
+            <th>Status Aktif</th>
+          <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
-        @forelse ($roles as $role)
+        @forelse ($majors as $major)
           <tr>
-            <td>{{ $roles->firstItem() + $loop->iteration - 1 }}</td>
-            <td>{{ $role->name }}</td>
+            <td>{{ $majors->firstItem() + $loop->iteration - 1 }}</td>
+            <td>{{ $major->name }}</td>
             <td>
-              <span class="badge {{ $role->is_active == 1 ? 'bg-success' : 'bg-secondary' }}">
-              {{ $role->is_active == 1 ? 'Active' : 'Inactive' }}
+              <span class="badge {{ $major->is_active == 1 ? 'bg-success' : 'bg-secondary' }}">
+                {{ $major->is_active == 1 ? 'Aktif' : 'Tidak Aktif' }}
               </span>
             </td></td>
             <td>
-              <a href="{{ route('role.edit', $role->id) }}" class="btn btn-sm btn-warning">Edit</a>
-              <form action="{{ route('role.destroy', $role->id) }}" method="POST" class="d-inline">
+              <a href="{{ route('major.edit', $major->id) }}" class="btn btn-sm btn-warning">Edit</a>
+              <form action="{{ route('major.destroy', $major->id) }}" method="POST" class="d-inline">
                 @csrf
                 @method('delete')
-                <button type="submit" class="btn btn-sm btn-danger btn-hapus" data-name="{{ $role->name }}">Hapus</button>
+                <button type="submit" class="btn btn-sm btn-danger btn-hapus" data-name="{{ $major->name }}">Hapus</button>
               </form>
             </td>
           </tr>
@@ -48,10 +48,10 @@
     <div class="d-flex justify-content-center">
       <div class="d-flex justify-content-between w-100">
         <div>
-          {{ $roles->firstItem() }} sampai {{ $roles->lastItem() }} dari {{ $roles->total() }} hasil
+          {{ $majors->firstItem() }} sampai {{ $majors->lastItem() }} dari {{ $majors->total() }} hasil
         </div>
         <div>
-          {{ $roles->appends(request()->query())->links('pagination::bootstrap-5') }}
+          {{ $majors->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
       </div>
     </div>
@@ -59,8 +59,8 @@
   </div>
 </section>
 
-@endsection
 
+@endsection
 
 @section('script')
 <script>
@@ -68,22 +68,21 @@
     e.preventDefault(); 
     
     var form = $(this).closest('form');
-    var roleName = $(this).data('name');
+    var majorName = $(this).data('name');
 
     Swal.fire({
-      title: `Delete "${roleName}"?`,
-      text: "Are you sure you want to delete this role?",
+      title: `Hapus "${majorName}"?`,
+      text: "Apakah Anda yakin ingin menghapus jurusan ini?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Ya, hapus!'
     }).then((result) => {
       if (result.isConfirmed) {
-        form.submit();
+      form.submit();
       }
     });
   });
 </script>
-
 @endsection
