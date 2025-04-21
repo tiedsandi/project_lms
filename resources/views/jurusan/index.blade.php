@@ -15,7 +15,8 @@
         <tr>
           <th>No</th>
           <th>Nama</th>
-            <th>Status Aktif</th>
+          <th>Status Aktif</th>
+          <th>PIC</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -28,7 +29,8 @@
               <span class="badge {{ $major->is_active == 1 ? 'bg-success' : 'bg-secondary' }}">
                 {{ $major->is_active == 1 ? 'Aktif' : 'Tidak Aktif' }}
               </span>
-            </td></td>
+            </td>
+            <td>Sandi</td>
             <td>
               <a href="{{ route('major.edit', $major->id) }}" class="btn btn-sm btn-warning">Edit</a>
               <form action="{{ route('major.destroy', $major->id) }}" method="POST" class="d-inline">

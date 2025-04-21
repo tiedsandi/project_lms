@@ -28,7 +28,7 @@
               <span class="badge {{ $role->is_active == 1 ? 'bg-success' : 'bg-secondary' }}">
               {{ $role->is_active == 1 ? 'Active' : 'Inactive' }}
               </span>
-            </td></td>
+            </td>
             <td>
               <a href="{{ route('role.edit', $role->id) }}" class="btn btn-sm btn-warning">Edit</a>
               <form action="{{ route('role.destroy', $role->id) }}" method="POST" class="d-inline">
