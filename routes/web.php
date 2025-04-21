@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -10,5 +11,6 @@ Route::get('logout', [AuthController::class, 'logout']);
 Route::post('action-login', [AuthController::class, 'actionLogin']);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('user', UserRoleController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('role', RoleController::class);
 });
