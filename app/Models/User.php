@@ -48,6 +48,21 @@ class User extends Authenticatable
 
     public function UserRoles()
     {
-        return $this->hasOne(UserRoles::class);
+        return $this->hasMany(UserRoles::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Roles::class, 'user_roles', 'user_id', 'role_id');
+    }
+
+    public function hasRole($role)
+    {
+        return $this->roles->contains('name', $role);
+    }
+
+    public function hasAnyRole(array $roles)
+    {
+        return $this->roles->whereIn('name', $roles)->isNotEmpty();
     }
 }

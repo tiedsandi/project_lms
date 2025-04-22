@@ -16,3 +16,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('role', RoleController::class);
     Route::resource('major', JurusanController::class);
 });
+
+// routes/web.php
+
+Route::middleware('role:admin')->group(function () {
+    Route::get('/test', function () {
+        return view('hello-world'); // mengembalikan view 'hello-world'
+    });
+});

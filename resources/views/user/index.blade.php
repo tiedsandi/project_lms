@@ -24,7 +24,7 @@
           <tr>
             <td>{{ $users->firstItem() + $loop->iteration - 1 }}</td>
             <td>{{ $user->name }}</td>
-            <td>{{ $user->userRoles->role->name }}</td>
+            <td>{{ $user->userRoles[0]->role->name }}</td>
             
             <td>
               <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
