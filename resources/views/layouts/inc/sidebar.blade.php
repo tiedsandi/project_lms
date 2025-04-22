@@ -39,7 +39,7 @@
         @endanyrole
         
         <li>
-          <a href="/instruktur" class="nav-link {{ Request::is('instruktur') ? '' : 'collapsed' }}">
+          <a href="/instructor" class="nav-link {{ Request::is('instruktur') ? '' : 'collapsed' }}">
             <i class="bi bi-circle"></i><span>Instruktur Manajemen</span>
           </a>
         </li>

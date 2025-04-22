@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -16,6 +17,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('role', RoleController::class);
     Route::resource('major', JurusanController::class);
 });
+
+Route::resource('instructor', InstructorController::class);
 
 // routes/web.php
 

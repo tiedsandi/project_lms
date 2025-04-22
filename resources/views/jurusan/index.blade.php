@@ -42,21 +42,29 @@
           </tr>
         @empty
           <tr>
-            <td colspan="4" class="text-center">Data tidak ada.</td>
+            <td colspan="5" class="text-center">Data tidak ada.</td>
           </tr>
         @endforelse
       </tbody>
     </table>
+
     <div class="d-flex justify-content-center">
-      <div class="d-flex justify-content-between w-100">
-        <div>
-          {{ $majors->firstItem() }} sampai {{ $majors->lastItem() }} dari {{ $majors->total() }} hasil
-        </div>
-        <div>
-          {{ $majors->appends(request()->query())->links('pagination::bootstrap-5') }}
+      {{ $majors->appends(request()->query())->links('pagination::bootstrap-5') }}
+    </div>
+    
+    {{-- @if ($majors->total() > 0)
+      <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-between w-100">
+          <div>
+            {{ $majors->firstItem() }} sampai {{ $majors->lastItem() }} dari {{ $majors->total() }} hasil
+          </div>
+          <div>
+            {{ $majors->appends(request()->query())->links('pagination::bootstrap-5') }}
+          </div>
         </div>
       </div>
-    </div>
+    @endif --}}
+
     
   </div>
 </section>

@@ -45,7 +45,12 @@
         @endforelse
       </tbody>
     </table>
+
     <div class="d-flex justify-content-center">
+      {{ $roles->appends(request()->query())->links('pagination::bootstrap-5') }}
+    </div>
+
+    {{-- <div class="d-flex justify-content-center">
       <div class="d-flex justify-content-between w-100">
         <div>
           {{ $roles->firstItem() }} sampai {{ $roles->lastItem() }} dari {{ $roles->total() }} hasil
@@ -54,7 +59,7 @@
           {{ $roles->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
       </div>
-    </div>
+    </div> --}}
     
   </div>
 </section>
