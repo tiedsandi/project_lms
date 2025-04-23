@@ -58,11 +58,11 @@
         <i class="bi bi-journal-text"></i><span>Learning Modul</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       
-        <ul id="forms-nav" class="nav-content collapse {{ Request::is('pos', 'pos-sale') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse {{ Request::is('pos', 'learning_module') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
           @anyrole(['Administrator', 'Admin', 'PIC', 'Instruktur'])
           @role('Administrator')
             <li>
-              <a href="/pos-sale" class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
+              <a href="/learning_module" class="nav-link {{ Request::is('learning_module') ? '' : 'collapsed' }}">
                 <i class="bi bi-circle"></i><span>Learning Module Management</span>
               </a>
             </li>
