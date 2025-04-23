@@ -86,10 +86,10 @@ class DetailModulController extends Controller
 
         // Simpan data ke database
         LearningModuleDetail::create($data);
-        Alert::success('Berhasil', 'Role berhasil diupdate!');
+        Alert::success('Berhasil', 'Role berhasil dibuat!');
 
         // Redirect ke halaman list atau balik dengan pesan sukses
-        return redirect()->route('detail_module.create');
+        return redirect()->route('detail_module.index');
     }
 
     public function show($id) {}

@@ -65,12 +65,12 @@
         @role('Instruktur')
           <li>
             <a href="{{route('detail_module.index')}}" class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
-              <i class="bi bi-circle"></i><span>Modul Pembelajaran</span>
+              <i class="bi bi-circle"></i><span>Modul Management</span>
             </a>
           </li>
           <li>
-            <a href="{{route('detail_module.index')}}" class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
-              <i class="bi bi-circle"></i><span>Upload Modul</span>
+            <a href="/module_ins" class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
+              <i class="bi bi-circle"></i><span>Modul Detail Management</span>
             </a>
           </li>
         @endrole

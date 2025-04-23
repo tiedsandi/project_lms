@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DetailModulController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\InstrukturLearningController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LearningModulController;
 use App\Http\Controllers\MyLearningController;
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('learning_module/{id}', [LearningModulController::class, 'destroy'])->name('learning_module.destroy');
 
     Route::resource('detail_module', DetailModulController::class);
+    Route::resource('module_ins', InstrukturLearningController::class);
     Route::resource('murid', StudentController::class);
 
     Route::get('/my-learning', [MyLearningController::class, 'index'])->name('my-learning.index');
