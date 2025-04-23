@@ -12,4 +12,14 @@ class LearningModuleDetail extends Model
         'file',
         'reference_link',
     ];
+
+    public function instructor()
+    {
+        return $this->belongsTo(Instructors::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(LearningModuleDetail::class, 'learning_module_id');
+    }
 }

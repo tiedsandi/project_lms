@@ -162,9 +162,11 @@ class InstructorController extends Controller
                 $userId = $request->user_id;
             }
 
+            // Menyimpan data instruktur dengan title berasal dari name
             Instructors::create([
                 'major_id' => $validatedData['major_id'] ?? null,
                 'user_id' => $userId,
+                'title' => $request->name,  // Menggunakan input 'name' untuk kolom 'title'
                 'gender' => $validatedData['gender'],
                 'address' => $validatedData['address'] ?? null,
                 'phone' => $validatedData['phone'] ?? null,
@@ -174,12 +176,13 @@ class InstructorController extends Controller
 
             Alert::success('Berhasil', 'Instruktur berhasil dibuat!');
         } catch (\Exception $e) {
-            Alert::error('Error', 'Gagal membuat instruktur!');
+            Alert::error('Error', 'Gagal membuat instruktur!' .  $e->getMessage());
             return redirect()->back()->withInput();
         }
 
         return redirect()->route('instructor.index');
     }
+
 
     /**
      * Generate random email untuk akun baru

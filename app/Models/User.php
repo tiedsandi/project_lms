@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->roles->whereIn('name', $roles)->isNotEmpty();
     }
+
+    public function student()
+    {
+        return $this->hasOne(Students::class, 'user_id');
+    }
 }

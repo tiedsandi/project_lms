@@ -19,7 +19,7 @@
     <div class="mb-3">
       <label for="user_pic" class="form-label">Penanggung Jawab (PIC) </label>
       <select name="user_pic" id="user_pic" class="form-select">
-      <option value="" disabled>Pilih Penanggung Jawab</option>
+      <option value="" >Pilih Penanggung Jawab</option>
       @foreach($usersPIC as $user)
         <option value="{{ $user->id }}" {{ old('user_pic', $major->user_pic) == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
       @endforeach

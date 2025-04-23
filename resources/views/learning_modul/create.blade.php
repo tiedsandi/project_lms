@@ -14,7 +14,7 @@
 
     <div class="mb-3">
       <label class="form-label">Nama Instructor</label>
-      <input type="text" class="form-control" value="{{ $instructor->user->name }}" disabled>
+      <input type="text" class="form-control" value="{{ $instructor->title }}" disabled>
     </div>
 
     <div class="mb-3">

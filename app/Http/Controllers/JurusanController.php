@@ -94,7 +94,7 @@ class JurusanController extends Controller
         $usersPIC = User::whereHas('UserRoles.role', fn($query) => $query->where('name', 'PIC'))
             ->orderBy('name')
             ->get();
-        return view('jurusan.edit', compact('major', 'userPIC'));
+        return view('jurusan.edit', compact('major', 'usersPIC'));
     }
 
     /**

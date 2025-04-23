@@ -144,4 +144,10 @@ class LearningModulController extends Controller
         // Redirect ke halaman index setelah berhasil dihapus
         return redirect()->route('learning_module.index');
     }
+
+    public function myLearning()
+    {
+        $modules = LearningModule::where('is_active', 1)->get();
+        return view('learning_modul.my_learning', compact('modules'));
+    }
 }

@@ -26,7 +26,7 @@ class AuthController extends Controller
 
     if (Auth::attempt($credentials)) {
       Alert::success('Selamat Datang Kembali', 'Anda berhasil masuk!');
-      return redirect('user');
+      return redirect('dashboard');
     } else {
       Alert::toast('Email atau kata sandi salah!', 'error');
       return back()->withInput();

@@ -28,12 +28,12 @@
             <td>{{ $instructors->firstItem() + $loop->index }}</td>
             <td>
               @if ($instructor->photo)
-                <img src="{{ asset('storage/' . $instructor->photo) }}" alt="{{ $instructor->user->name }}" width="50" height="50" class="rounded-circle" style="object-fit: cover;">
+                <img src="{{ asset('storage/' . $instructor->photo) }}" alt="{{ $instructor->title }}" width="50" height="50" class="rounded-circle" style="object-fit: cover;">
               @else
                 <span class="text-muted">No photo</span>
               @endif
             </td>
-            <td>{{ $instructor->user->name }}</td>
+            <td>{{ $instructor->title }}</td>
             <td>{{ $instructor->major->name ?? '-' }}</td> {{-- Pastikan major punya 'name' --}}
             <td>{{ $instructor->phone ?? '-' }}</td>
             <td>
@@ -52,11 +52,11 @@
               <form action="{{ route('instructor.destroy', $instructor->id) }}" method="POST" class="d-inline">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-sm btn-danger btn-hapus" data-name="{{ $instructor->user->name }}">Delete</button>
+                  <button type="submit" class="btn btn-sm btn-danger btn-hapus" data-name="{{ $instructor->title }}">Delete</button>
                 </form>
             </td>
           </tr>
-        @empty
+        @empty 
           <tr>
             <td colspan="7" class="text-center">Data kosong.</td>
           </tr>

@@ -28,7 +28,7 @@
           <option value="">Pilih Instructor</option>
           @foreach ($instructors as $instructor)
             <option value="{{ $instructor->id }}" {{ request('instructor_id') == $instructor->id ? 'selected' : '' }}>
-              {{ $instructor->user->name }}
+              {{ $instructor->title }}
             </option>
           @endforeach
         </select>

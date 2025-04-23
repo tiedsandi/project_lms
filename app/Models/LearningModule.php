@@ -12,4 +12,9 @@ class LearningModule extends Model
         'instructor_id',
         'is_active',
     ];
+
+    public function learningModule()
+    {
+        return $this->belongsTo(LearningModule::class, 'learning_module_id');
+    }
 }
