@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instructors;
+use App\Models\MajorDetail;
 use App\Models\Roles;
 use App\Models\User;
 use App\Models\UserRoles;
@@ -37,7 +39,7 @@ class UserController extends Controller
     {
         $validation  = Validator::make($request->all(), [
             'name' => 'required|string',
-            'email' => 'required|string|email',
+            'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:8',
             'role_id' => 'required|exists:roles,id',
         ]);
@@ -127,7 +129,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        MajorDetail::where('user_id', $id)->delete();
         UserRoles::where('user_id', $id)->delete();
+        Instructors::where('user_id', $id)->update(['user_id' => null]);
+
 
         $user->delete();
 
