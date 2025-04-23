@@ -18,6 +18,12 @@ class DetailModulController extends Controller
 
         $instructor = Instructors::where('user_id', $id)->first();
 
+        if (!$instructor || !$instructor->major_id) {
+
+            Alert::error('Error', 'Anda belum terdaftar sebagai instruktur atau major belum ditentukan.');
+            return redirect()->route('learning_module.index');
+        }
+
         // Ambil semua modul yang dibuat oleh instructor ini
         $learning_module = LearningModule::where('instructor_id', $instructor->id)->get();
 
@@ -36,10 +42,23 @@ class DetailModulController extends Controller
     {
         $user = auth()->user();
         $id = $user->id;
-        $Instructors = Instructors::where('user_id', $id)->first();
-        $learning_module = LearningModule::where('instructor_id', $Instructors->id)->get();
+
+        // Cek apakah user sudah memiliki instruktur terkait
+        $instructor = Instructors::where('user_id', $id)->first();
+
+        // Jika instruktur tidak ada atau instruktur tidak memiliki major_id, handle dengan baik
+        if (!$instructor || !$instructor->major_id) {
+
+            Alert::error('Error', 'Anda belum terdaftar sebagai instruktur atau major belum ditentukan.');
+            return redirect()->route('learning_module.index');
+        }
+
+        // Jika instruktur ada dan memiliki major_id yang valid
+        $learning_module = LearningModule::where('instructor_id', $instructor->id)->get();
+
         return view('module_detail.create', compact('learning_module'));
     }
+
 
     public function store(Request $request)
     {
