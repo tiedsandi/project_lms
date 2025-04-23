@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DetailModulController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LearningModulController;
@@ -26,6 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('learning_module/{id}/edit', [LearningModulController::class, 'edit'])->name('learning_module.edit');
     Route::put('learning_module/{id}', [LearningModulController::class, 'update'])->name('learning_module.update');
     Route::delete('learning_module/{id}', [LearningModulController::class, 'destroy'])->name('learning_module.destroy');
+
+    Route::resource('detail_module', DetailModulController::class);
 });
 
 Route::resource('instructor', InstructorController::class);

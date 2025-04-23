@@ -69,7 +69,8 @@
           @endrole
           
           <li>
-            <a href="/pos-sale" class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
+            <a href="{{route('detail_module.create')}}"
+            class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
               <i class="bi bi-circle"></i><span>Learning Material Upload</span>
             </a>
           </li>
@@ -85,7 +86,7 @@
 
           @role('Instruktur')
           <li>
-            <a href="/pos-sale" class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
+            <a href="{{route('detail_module.index')}}" class="nav-link {{ Request::is('pos-sale') ? '' : 'collapsed' }}">
               <i class="bi bi-circle"></i><span>My Upload Materials</span>
             </a>
           </li>
