@@ -15,6 +15,15 @@ class Students extends Model
         'phone',
         'photo',
         'is_active',
-
     ];
+
+    public function major()
+    {
+        return $this->belongsTo(Majors::class, 'major_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

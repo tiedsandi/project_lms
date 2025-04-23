@@ -45,7 +45,7 @@
         </li>
 
         <li>
-          <a href="/siswa" class="nav-link {{ Request::is('siswa') ? '' : 'collapsed' }}">
+          <a href="{{route('murid.index')}}" class="nav-link {{ Request::is('siswa') ? '' : 'collapsed' }}">
             <i class="bi bi-circle"></i><span>Siswa Management</span>
           </a>
         </li>        
